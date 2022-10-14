@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -panxm
+ls -paxm
