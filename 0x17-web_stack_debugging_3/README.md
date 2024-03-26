@@ -1,3 +1,2 @@
-## Web Stack Debugging
+# To be updated 
 
-Debug a wordpress website which uses LAMP stack

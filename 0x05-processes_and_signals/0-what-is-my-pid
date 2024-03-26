@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-# print the pud of this script
-echo "$$"
+# Displays its own PID.
+
+echo $$

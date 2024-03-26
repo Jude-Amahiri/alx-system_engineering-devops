@@ -1,3 +1,1 @@
-## SSL
-
-Configuring https
+# To be updated

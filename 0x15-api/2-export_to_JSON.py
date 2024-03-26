@@ -1,29 +1,19 @@
 #!/usr/bin/python3
-"""import api from a url"""
+"""Exports to-do list information for a given employee ID to JSON format."""
 import json
 import requests
 import sys
 
 if __name__ == "__main__":
-    try:
-        id = int(sys.argv[1])
-        url = "https://jsonplaceholder.typicode.com"
-        res = requests.get('{}/users/{}'.format(url, id)).json()
-        res_todo = requests.get("{}/todos".format(url),
-                                params={"userId": id}).json()
-        name = res.get("username")
-        user_data = list(map(
-                    lambda x: {
-                        "task": x.get("title"),
-                        "completed": x.get("completed"),
-                        "username": name
-                    },
-                    res_todo
-                ))
-        with open('{}.json'.format(id), 'w') as apidata:
-            data = {
-                "{}".format(id): user_data
-            }
-            json.dump(data, apidata)
-    except ValueError:
-        pass
+    user_id = sys.argv[1]
+    url = "https://jsonplaceholder.typicode.com/"
+    user = requests.get(url + "users/{}".format(user_id)).json()
+    username = user.get("username")
+    todos = requests.get(url + "todos", params={"userId": user_id}).json()
+
+    with open("{}.json".format(user_id), "w") as jsonfile:
+        json.dump({user_id: [{
+                "task": t.get("title"),
+                "completed": t.get("completed"),
+                "username": username
+            } for t in todos]}, jsonfile)
